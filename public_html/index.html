@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Calculadora</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css.css" rel="stylesheet">
+        <script type="text/javascript">
+            function calcula(num){
+                if (typeof fvisor == 'undefined'){
+                    document.formul.visor.value = '';
+                }
+                document.formul.visor.value = document.formul.visor.value + num;
+                fvisor = 1;
+            }
+            function limpar(){
+                document.formul.visor.value ='';
+                delete fvalor;
+                delete foper;
+                delete fvisor;
+            }
+            
+            function operacao(oper, valor1, valor2) {
+   if (oper == "somar") {
+      var valor = parseFloat(valor1) + parseFloat(valor2);
+   } else {
+      if (oper == "subtrair") {
+         var valor = valor1 - valor2;
+      } else {
+         if (oper == "multiplicar") {
+            var valor = valor1 * valor2;
+         } else {
+            var valor = valor1 / valor2;
+         }
+      }
+   }
+   return (valor);
+            }
+   
+       function Tipo(oper) {
+        var valor = document.formul.visor.value;
+        delete fvisor;
+
+   if (typeof foper != 'undefined' && oper == 'resultado') {
+      fvalor = operacao(foper, fvalor, valor);
+      document.formul.visor.value = fvalor;
+      delete oper;
+      delete fvalor;
+      return(0);
+   }
+
+   if (typeof fvalor != 'undefined') {
+      fvalor = operacao(foper, fvalor, valor);
+      foper = oper;
+      document.formul.visor.value = fvalor;
+   } else {
+      fvalor = valor;
+      foper = oper;
+   }
+
+}
+</script>
+    </head>
+    <body>
+        <form name = "formul" method = "POST" action = "">
+            
+            <table>
+                <tr>
+                    <input type ="text" name = "visor" id ="visor">
+                    <td><input type = "button" name = "nove" value = "9" onClick = "calcula(9)"></td>
+                     <td><input type = "button" name = "oito" value = "8" onClick = "calcula(8)"></td>
+                      <td><input type = "button" name = "sete" value = "7" onClick = "calcula(7)"></td>
+                       <td><input type = "button" name = "sub" value = "-" onClick = "Tipo('subtrair')"></td>
+                </tr>
+                <tr>
+                    <td><input type = "button" name = "seis" value = "6" onClick = "calcula(6)"></td>
+                     <td><input type = "button" name = "cinco" value = "5" onClick = "calcula(5)"></td>
+                      <td><input type = "button" name = "quatro" value = "4" onClick = "calcula(4)"></td>
+                       <td><input type = "button" name = "soma" value = "+" onClick = "Tipo('somar')"></td>
+                </tr>
+                <tr>
+                    <td><input type = "button" name = "tres" value = "3" onClick = "calcula(3)"></td>
+                     <td><input type = "button" name = "dois" value = "2" onClick = "calcula(2)"></td>
+                      <td><input type = "button" name = "um" value = "1" onClick = "calcula(1)"></td>
+                       <td><input type = "button" name = "div" value = "/" onClick = "Tipo('dividir')"></td>
+                </tr>
+                <tr>
+                    <td><input type = "button" name = "zero" value = "0" onClick = "calcula(0)"></td>
+                     <td><input type = "button" name = "res" value = "=" onClick = "Tipo('resultado')"></td>
+                      <td><input type = "button" name = "limpa" value = "AC" onClick = "limpar()"></td>
+                       <td><input type = "button" name = "mul" value = "*" onClick = "Tipo('multiplicar')"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
